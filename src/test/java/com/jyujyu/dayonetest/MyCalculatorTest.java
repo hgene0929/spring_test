@@ -3,6 +3,7 @@ package com.jyujyu.dayonetest;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -12,6 +13,7 @@ import org.junit.jupiter.api.Test;
 class MyCalculatorTest {
 
 	@Test
+	@DisplayName("MyCalculator 덧셈 테스트")
 	void addTest() {
 		// AAA 패턴
 
@@ -26,6 +28,7 @@ class MyCalculatorTest {
 	}
 
 	@Test
+	@DisplayName("MyCalculator 뺄셈 테스트")
 	void minusTest() {
 		// GWT 패턴
 
@@ -40,6 +43,7 @@ class MyCalculatorTest {
 	}
 
 	@Test
+	@DisplayName("MyCalculator 곱셈 테스트")
 	void multiplyTest() {
 		// 일반적으로 회사에서 사용하는 테스트 관련 주석처리
 
@@ -54,6 +58,7 @@ class MyCalculatorTest {
 	}
 
 	@Test
+	@DisplayName("MyCalculator 나누기 테스트")
 	void divideTest() {
 		MyCalculator myCalculator = new MyCalculator(10.0);
 
@@ -63,6 +68,7 @@ class MyCalculatorTest {
 	}
 
 	@Test
+	@DisplayName("MyCalculator 사칙연산 테스트")
 	void complicatedCalculateTest() {
 		// given
 		MyCalculator myCalculator = new MyCalculator();
@@ -80,6 +86,8 @@ class MyCalculatorTest {
 	}
 
 	@Test
+	// 특정 규칙을 담은 테스트에 대해서는 자세하게 아래와 같이 이름을 지정해주는 것 권장
+	@DisplayName("MyCalculator 0으로 나누었을 때에는 ZeroDivisionException을 발생시켜야 합니다")
 	void divideZeroTest() {
 		// given
 		MyCalculator myCalculator = new MyCalculator(10.0);

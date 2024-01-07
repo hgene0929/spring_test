@@ -3,12 +3,19 @@ package com.jyujyu.dayonetest;
 import java.util.List;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.DisplayNameGeneration;
+import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.Test;
 
+// default : 테스트 메소드명을 그대로 출력
+// ReplaceUnderscores : 테스트 메소드에 있는 언더스코어(_)를 공백으로 대체
+@DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
 public class JUnitPracticeTest {
 
 	@Test // 테스트 코드 위에 항상 붙어야 하는 어노테이션
-	public void assertEqualsTest() {
+	@DisplayName("Assert Equals 메소드 테스트") // 직접 이름을 지정(DisplayNameGeneration과 충돌시, DisplayName 우선적용)
+	public void assert_equals_test() {
 		String expect = "Something";
 		String actual = "Something";
 
@@ -17,6 +24,7 @@ public class JUnitPracticeTest {
 	}
 
 	@Test
+	@DisplayName("Assert Not Equals 메소드 테스트")
 	public void assertNotEqualsTest() {
 		String expect = "Something";
 		String actual = "Hello";
@@ -26,6 +34,7 @@ public class JUnitPracticeTest {
 	}
 
 	@Test
+	@DisplayName("Assert True 메소드 테스트")
 	public void assertTrueTest() {
 		Integer a = 10;
 		Integer b = 10;
@@ -35,6 +44,7 @@ public class JUnitPracticeTest {
 	}
 
 	@Test
+	@DisplayName("Assert False 메소드 테스트")
 	public void assertFalseTest() {
 		Integer a = 10;
 		Integer b = 20;
@@ -44,6 +54,7 @@ public class JUnitPracticeTest {
 	}
 
 	@Test
+	@DisplayName("Assert Throws 메소드 테스트")
 	public void assertThrowsTest() {
 		// assertThrows() : 예외가 발생하는지 확인(어떤 예외타입인지도 확인가능)
 		Assertions.assertThrows(RuntimeException.class, () -> {
@@ -52,6 +63,7 @@ public class JUnitPracticeTest {
 	}
 
 	@Test
+	@DisplayName("Assert Not Null 메소드 테스트")
 	public void assertNotNullTest() {
 		String value = "Hello";
 
@@ -60,6 +72,7 @@ public class JUnitPracticeTest {
 	}
 
 	@Test
+	@DisplayName("Assert Null 메소드 테스트")
 	public void assertNullTest() {
 		String value = null;
 
@@ -68,6 +81,7 @@ public class JUnitPracticeTest {
 	}
 
 	@Test
+	@DisplayName("Assert Iterable 메소드 테스트")
 	public void assertIterableEqualsTest() {
 		List<Integer> list1 = List.of(1, 2);
 		List<Integer> list2 = List.of(1, 2);
@@ -77,6 +91,7 @@ public class JUnitPracticeTest {
 	}
 
 	@Test
+	@DisplayName("Assert All 메소드 테스트")
 	public void assertAllTest() {
 		// 1st 테스트
 		String expect = "Something";
