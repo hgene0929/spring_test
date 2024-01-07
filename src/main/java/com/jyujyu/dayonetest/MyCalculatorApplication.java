@@ -1,5 +1,8 @@
 package com.jyujyu.dayonetest;
 
+/**
+ * MyCalculator 클래스의 코드에 대한 직접 테스트(테스트 코드 사용 X)
+ */
 public class MyCalculatorApplication {
 
 	public static void main(String[] args) {
