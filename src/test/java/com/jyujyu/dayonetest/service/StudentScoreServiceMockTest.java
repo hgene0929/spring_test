@@ -18,7 +18,7 @@ import com.jyujyu.dayonetest.model.StudentPassFixture;
 import com.jyujyu.dayonetest.model.StudentScore;
 import com.jyujyu.dayonetest.model.StudentScoreFixture;
 import com.jyujyu.dayonetest.model.StudentScoreTestDataBuilder;
-import com.jyujyu.dayonetest.repository.StudentFailRepsitory;
+import com.jyujyu.dayonetest.repository.StudentFailRepository;
 import com.jyujyu.dayonetest.repository.StudentPassRepository;
 import com.jyujyu.dayonetest.repository.StudentScoreRepository;
 
@@ -28,15 +28,16 @@ public class StudentScoreServiceMockTest {
 	private StudentScoreService studentScoreService;
 	private StudentScoreRepository studentScoreRepository;
 	private StudentPassRepository studentPassRepository;
-	private StudentFailRepsitory studentFailRepsitory;
+	private StudentFailRepository studentFailRepository;
 
 	@BeforeEach // 모든 테스트가 각각 실행되기 이전에 1번씩 수행됨
 	public void beforeEach() {
 		// Mockito.mock() : 서비스 클래스가 의존성주입 받아야하는 인터페이스의 Mock 객체 생성
 		studentScoreRepository = Mockito.mock(StudentScoreRepository.class);
 		studentPassRepository = Mockito.mock(StudentPassRepository.class);
-		studentFailRepsitory = Mockito.mock(StudentFailRepsitory.class);
-		studentScoreService = new StudentScoreService(studentScoreRepository, studentPassRepository, studentFailRepsitory);
+		studentFailRepository = Mockito.mock(StudentFailRepository.class);
+		studentScoreService = new StudentScoreService(studentScoreRepository, studentPassRepository,
+			studentFailRepository);
 	}
 
 	@Test
@@ -96,7 +97,7 @@ public class StudentScoreServiceMockTest {
 		Assertions.assertEquals(expectStudentPass.getExam(), capturedStudentPass.getExam());
 		Assertions.assertEquals(expectStudentPass.getAvgScore(), capturedStudentPass.getAvgScore());
 
-		Mockito.verify(studentFailRepsitory, Mockito.times(0)).save(Mockito.any());
+		Mockito.verify(studentFailRepository, Mockito.times(0)).save(Mockito.any());
 	}
 
 	@Test
@@ -130,7 +131,7 @@ public class StudentScoreServiceMockTest {
 
 		Mockito.verify(studentPassRepository, Mockito.times(0)).save(Mockito.any());
 
-		Mockito.verify(studentFailRepsitory, Mockito.times(1)).save(studentFailArgumentCaptor.capture());
+		Mockito.verify(studentFailRepository, Mockito.times(1)).save(studentFailArgumentCaptor.capture());
 		StudentFail capturedStudentFail = studentFailArgumentCaptor.getValue();
 		Assertions.assertEquals(expectStudentFail.getStudentName(), capturedStudentFail.getStudentName());
 		Assertions.assertEquals(expectStudentFail.getExam(), capturedStudentFail.getExam());
@@ -156,7 +157,7 @@ public class StudentScoreServiceMockTest {
 		StudentScoreService studentScoreService = new StudentScoreService(
 			studentScoreRepository,
 			studentPassRepository,
-			studentFailRepsitory
+			studentFailRepository
 		);
 
 		// when
@@ -179,7 +180,7 @@ public class StudentScoreServiceMockTest {
 		StudentFail expectStudent2 = StudentFailFixture.create("testName2", givenTestExam);
 
 		// Mockito.when().thenReturn() : when 파라미터의 동작이 호출되면, thenReturn() 파라미터의 내용이 무조건 수행됨
-		Mockito.when(studentFailRepsitory.findAll()).thenReturn(List.of(
+		Mockito.when(studentFailRepository.findAll()).thenReturn(List.of(
 			notExpectStudent,
 			expectStudent1,
 			expectStudent2
@@ -188,7 +189,7 @@ public class StudentScoreServiceMockTest {
 		StudentScoreService studentScoreService = new StudentScoreService(
 			studentScoreRepository,
 			studentPassRepository,
-			studentFailRepsitory
+			studentFailRepository
 		);
 
 		// when

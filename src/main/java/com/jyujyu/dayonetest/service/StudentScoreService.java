@@ -10,7 +10,7 @@ import com.jyujyu.dayonetest.controller.response.ExamPassStudentResponse;
 import com.jyujyu.dayonetest.model.StudentFail;
 import com.jyujyu.dayonetest.model.StudentPass;
 import com.jyujyu.dayonetest.model.StudentScore;
-import com.jyujyu.dayonetest.repository.StudentFailRepsitory;
+import com.jyujyu.dayonetest.repository.StudentFailRepository;
 import com.jyujyu.dayonetest.repository.StudentPassRepository;
 import com.jyujyu.dayonetest.repository.StudentScoreRepository;
 
@@ -22,7 +22,7 @@ public class StudentScoreService {
 
 	private final StudentScoreRepository studentScoreRepository;
 	private final StudentPassRepository studentPassRepository;
-	private final StudentFailRepsitory studentFailRepsitory;
+	private final StudentFailRepository studentFailRepository;
 
 	public void saveScore(
 		String studentName,
@@ -64,7 +64,7 @@ public class StudentScoreService {
 				.avgScore(avgScore)
 				.build();
 
-			studentFailRepsitory.save(studentFail);
+			studentFailRepository.save(studentFail);
 		}
 	}
 
@@ -78,7 +78,7 @@ public class StudentScoreService {
 	}
 
 	public List<ExamFailStudentResponse> getFailStudentsList(String exam) {
-		List<StudentFail> studentFails = studentFailRepsitory.findAll();
+		List<StudentFail> studentFails = studentFailRepository.findAll();
 
 		return studentFails.stream()
 			.filter((fail) -> fail.getExam().equals(exam))
