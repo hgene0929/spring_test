@@ -120,7 +120,12 @@ spotless {
 
         removeUnusedImports()
         trimTrailingWhitespace()
-        indentWithSpaces(4)
+        indentWithSpaces()
         endWithNewline()
     }
+}
+
+tasks.register('addGitPrecommitHook', Copy) {
+    from 'script/pre-commit'
+    into '.git/hooks'
 }
